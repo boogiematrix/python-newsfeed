@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, session
-from app.models import User
+from app.models import User, Post, Comment, Vote
 from app.db import get_db
 import sys
 
@@ -47,7 +47,7 @@ def login():
 
   if user.verify_password(data['password']) == False:
     return jsonify(message='Incorrect credentials'), 400
-    
+
   session.clear()
   session['user_id'] = user.id
   session['loggedIn'] = True
